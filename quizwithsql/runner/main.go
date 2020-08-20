@@ -28,6 +28,7 @@ func validateProblem(temp problem) string {
 	return "nil"
 }
 
+//RunQuiz   The main runner function that takes in the problemset and conducts the quiz.
 func RunQuiz(problemSet []problem, timelimit int) (int, []int) {
 	//this function runs the questionnaire, keeping time
 	var count int = 0
@@ -70,6 +71,7 @@ func RunQuiz(problemSet []problem, timelimit int) (int, []int) {
 	return count, wrongQuestions
 }
 
+//AddQuestion   Given a pointer to a database, one can insert a question with the options.
 func AddQuestion(db *sql.DB) {
 	fmt.Println("Adding a question!")
 	runstat, err := db.Prepare("INSERT INTO problems(question, optionA, optionB, optionC, optionD, correctoption) VALUES (?, ?, ?, ?, ?, ?)")
@@ -95,6 +97,7 @@ func AddQuestion(db *sql.DB) {
 	}
 }
 
+//EditQuestion   Given a pointer to the database, find and edit an already existing question.
 func EditQuestion(db *sql.DB) {
 	fmt.Println("Editing a question!")
 	fmt.Println("Viewing all questions!")
@@ -157,6 +160,7 @@ func ViewQuestion(db *sql.DB) {
 
 }
 
+//StartQuiz   Randomly selects a problemset from the given Quiz database.
 func StartQuiz(db *sql.DB) {
 	fmt.Println("Starting Quiz")
 	rows, err := db.Query("SELECT COUNT(*) FROM problems")
